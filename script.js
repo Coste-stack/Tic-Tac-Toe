@@ -36,45 +36,30 @@ function addMove() {
 }
 
 function checkWin(y, x) {
-    function checkColumns() {
+    function checkRowsColumns() {
         let initX = x;
         let initY = y;
 
-        let sum = 0;
+        let sumCol = 0;
+        let sumRow = 0;
         for(let i = 0; i < 3; i++) {
-            sum += ar[y][x];
+            sumCol += ar[y][initX];
+            sumRow += ar[initY][x];
 
             y++;
-            if(y > 2) { y = 0; }
-
-            // say if someone won
-            if (sum == 3) { console.log("1 Won"); break; }
-            else if (sum == -3) { console.log("-1 Won"); break; }
-        }
-        x = initX;
-        y = initY;
-    }
-
-    function checkRows() {
-        let initX = x;
-        let initY = y;
-        
-        let sum = 0;
-        for(let i = 0; i < 3; i++) {
-            sum += ar[y][x];
-
             x++;
+            if(y > 2) { y = 0; }
             if(x > 2) { x = 0; }
 
             // say if someone won
-            if (sum == 3) { console.log("1 Won"); break; }
-            else if (sum == -3) { console.log("-1 Won"); break; }
+            if (sumCol == 3 || sumRow == 3) { console.log("1 Won"); break; }
+            else if (sumCol == -3 || sumRow == -3) { console.log("-1 Won"); break; }
         }
         x = initX;
         y = initY;
     }
-    checkColumns();
-    checkRows();
+
+    checkRowsColumns();
 }
 
 while (true) {
