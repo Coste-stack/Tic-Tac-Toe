@@ -63,6 +63,23 @@ function checkWin(y, x) {
 const announcement = document.querySelector('.announcement');
 
 let moveNum = 1;
+function choosePlayer() {
+    // add a button for drawing a random player
+    const choosePlayerButton = document.createElement('button');
+    choosePlayerButton.textContent = "Choose Player";
+    announcement.appendChild(choosePlayerButton);
+
+    choosePlayerButton.addEventListener('click', () => {
+        // get random number from (1, 2)
+        moveNum = Math.floor(Math.random() * 2) + 1;
+
+        choosePlayerButton.remove();
+        if(moveNum == 1) { announcement.textContent = "X starts"; }
+        else if(moveNum == 2) { announcement.textContent = "O starts"; }
+    });
+}
+
+choosePlayer();
 let inkr;
 let moveCount = 0;
 let isFinished = false;
@@ -103,6 +120,9 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
             container.appendChild(resetButton);
 
             resetButton.addEventListener('click', () => {
+                // delete the button
+                resetButton.remove();
+
                 // reset all 'block' attributes to default
                 gameboard.querySelectorAll('.block').forEach(el => {
                     el.classList.remove('clicked');
@@ -115,9 +135,7 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
                 isFinished = false;
                 announcement.textContent = "";
                 resetArray();
-
-                // delete the button
-                resetButton.remove();
+                choosePlayer();
             });
         }
     }
