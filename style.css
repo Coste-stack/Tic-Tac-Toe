@@ -1,0 +1,23 @@
+body {
+    width: 100vw; height: 100vh;
+}
+
+.gameboard-container {
+    width: 100%; height: 100%;
+    display: grid;
+    place-items: center center;
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    
+    gap: 10px;
+}
+
+.block {
+    background-color: aquamarine;
+    border-style: solid;
+    width: 200px; height: 200px;;
+}

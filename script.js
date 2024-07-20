@@ -1,3 +1,15 @@
+const gameboard = document.querySelector('.gameboard');
+for(let i = 0; i < 3; i++){
+    for(let j = 0; j < 3; j++){
+        const block = document.createElement('div');
+        block.classList.add('block');
+        block.classList.add(`${i}${j}`);
+        gameboard.appendChild(block);
+    }
+}
+
+
+
 function printArray(ar) {
     for(let i = 0; i < 3; i++) {
         let line = "";
@@ -92,3 +104,4 @@ while (true) {
     console.log("---------")
     checkWin(move[0], move[1]);
 }
+
