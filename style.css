@@ -1,5 +1,6 @@
 body {
     width: 100vw; height: 100vh;
+    background-color: #D4F1F4;
 }
 
 .gameboard-container {
@@ -18,7 +19,7 @@ body {
 }
 
 .block {
-    background-color: aquamarine;
+    background-color: #75E6DA;
     border-style: solid;
     width: 200px; height: 200px;;
 
@@ -29,8 +30,21 @@ body {
 
 .announcement {
     width: 100%; height: 100%;
-    background-color: brown;
+    background-color: #05445E;
 
     display: grid;
     place-items: center center;
+}
+
+button {
+    border-style: solid;
+    border-radius: 0.5rem;
+    background-color: #189AB4;
+
+    color: #D4F1F4;
+}
+
+.announcement {
+    color: #D4F1F4;
+    font-size: 1.2rem;
 }
