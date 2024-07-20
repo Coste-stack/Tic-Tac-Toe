@@ -61,9 +61,10 @@ const winAnnouncement = document.querySelector('.win-announcement');
 let moveNum = 1;
 let inkr;
 let moveCount = 0;
+let isFinished = false;
 // add on click event to all blocks
 gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', () => {
-    if(!el.classList.contains('clicked')){
+    if(!el.classList.contains('clicked') && !isFinished){
         // get move
         let move = el.classList[1];
         move = [ move[0], move[1] ];
@@ -85,9 +86,9 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         el.dataset.value = 1;
 
         let win = checkWin(move[0], move[1]);
-        if (win === 1) { winAnnouncement.textContent = "X Won"; }
-        else if (win === -1) { winAnnouncement.textContent = "O Won"; }
+        if (win === 1) { winAnnouncement.textContent = "X Won"; isFinished = true; }
+        else if (win === -1) { winAnnouncement.textContent = "O Won"; isFinished = true; }
 
-        if (moveCount == 9) {winAnnouncement.textContent = "Draw"; }
+        if (moveCount == 9) {winAnnouncement.textContent = "Draw"; isFinished = true; }
     }
 }));
