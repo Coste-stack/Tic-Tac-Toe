@@ -6,7 +6,7 @@ body {
     width: 100%; height: 100%;
     display: grid;
     place-items: center center;
-    grid-template-rows: 10% 90%;
+    grid-template-rows: 10% 5% 85%;
 }
 
 .gameboard {

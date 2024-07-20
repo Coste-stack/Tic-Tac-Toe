@@ -90,5 +90,33 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         else if (win === -1) { winAnnouncement.textContent = "O Won"; isFinished = true; }
 
         if (moveCount == 9) {winAnnouncement.textContent = "Draw"; isFinished = true; }
+
+        if (isFinished) {
+            const resetButton = document.createElement('button');
+            resetButton.textContent = "Reset Game";
+
+            const container = document.querySelector('.container');
+            container.appendChild(resetButton);
+
+            resetButton.addEventListener('click', () => {
+                // reset all 'block' attributes to default
+                gameboard.querySelectorAll('.block').forEach(el => {
+                    el.classList.remove('clicked');
+                    delete el.dataset.value;
+                    el.innerHTML = "";
+                })
+
+                // reset all values to default
+                moveNum = 1;
+                moveCount = 0;
+                isFinished = false;
+                winAnnouncement.textContent = "";
+
+                // delete the button
+                resetButton.remove();
+            });
+
+
+        }
     }
 }));
