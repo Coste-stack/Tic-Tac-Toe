@@ -66,7 +66,7 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         let move = el.classList[1];
         move = [ move[0], move[1] ];
         console.log(move);
-
+        moveCount++;
         moveNum++;
         // change increment every move
         if (moveNum % 2 != 0) { inkr = -1; }
@@ -79,12 +79,10 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
 
         // change array move indices
         ar[move[0]][move[1]] = inkr;
-
+        
+        // add classes - 'clicked' to not click it again, and 'value' to check if 'x' or 'o'
         el.classList.add('clicked');
-        el.style.backgroundColor = "red";
         el.dataset.value = 1;
-
-        moveCount++;
 
         let win = checkWin(move[0], move[1]);
         if (win === 1) { alert("1 Won"); }
