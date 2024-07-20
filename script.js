@@ -10,12 +10,16 @@ for(let i = 0; i < 3; i++){
 }
 
 // set up the array
-ar = [[], [], []]
-for(let i = 0; i < 3; i++) {
-    for(let j = 0; j < 3; j++) {
-        ar[i][j] = 0;
+let ar;
+function resetArray() {
+    ar = [[], [], []]
+    for(let i = 0; i < 3; i++) {
+        for(let j = 0; j < 3; j++) {
+            ar[i][j] = 0;
+        }
     }
 }
+resetArray();
 
 function checkWin(y, x) {
     let initX = x; let initY = y;
@@ -56,7 +60,7 @@ function checkWin(y, x) {
     }
 }
 
-const winAnnouncement = document.querySelector('.win-announcement');
+const announcement = document.querySelector('.announcement');
 
 let moveNum = 1;
 let inkr;
@@ -71,6 +75,7 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         console.log(move);
         moveCount++;
         moveNum++;
+
         // change increment every move
         if (moveNum % 2 != 0) { inkr = -1; }
         else { inkr = 1; }
@@ -83,13 +88,12 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         
         // add classes - 'clicked' to not click it again, and 'value' to check if 'x' or 'o'
         el.classList.add('clicked');
-        el.dataset.value = 1;
 
         let win = checkWin(move[0], move[1]);
-        if (win === 1) { winAnnouncement.textContent = "X Won"; isFinished = true; }
-        else if (win === -1) { winAnnouncement.textContent = "O Won"; isFinished = true; }
+        if (win === 1) { announcement.textContent = "X Won"; isFinished = true; }
+        else if (win === -1) { announcement.textContent = "O Won"; isFinished = true; }
 
-        if (moveCount == 9) {winAnnouncement.textContent = "Draw"; isFinished = true; }
+        if (moveCount == 9) {announcement.textContent = "Draw"; isFinished = true; }
 
         if (isFinished) {
             const resetButton = document.createElement('button');
@@ -102,7 +106,6 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
                 // reset all 'block' attributes to default
                 gameboard.querySelectorAll('.block').forEach(el => {
                     el.classList.remove('clicked');
-                    delete el.dataset.value;
                     el.innerHTML = "";
                 })
 
@@ -110,13 +113,12 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
                 moveNum = 1;
                 moveCount = 0;
                 isFinished = false;
-                winAnnouncement.textContent = "";
+                announcement.textContent = "";
+                resetArray();
 
                 // delete the button
                 resetButton.remove();
             });
-
-
         }
     }
 }));
