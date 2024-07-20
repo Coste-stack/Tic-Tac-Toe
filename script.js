@@ -62,7 +62,7 @@ function checkWin(y, x) {
 
 const announcement = document.querySelector('.announcement');
 
-let moveNum = 1;
+let moveNum = undefined;
 function choosePlayer() {
     // add a button for drawing a random player
     const choosePlayerButton = document.createElement('button');
@@ -85,7 +85,11 @@ let moveCount = 0;
 let isFinished = false;
 // add on click event to all blocks
 gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', () => {
-    if(!el.classList.contains('clicked') && !isFinished){
+    if(!el.classList.contains('clicked') && !isFinished && moveNum != undefined){
+
+        // remove the initial announcement on first move
+        if(moveCount === 0){ announcement.textContent = ""; }
+        
         // get move
         let move = el.classList[1];
         move = [ move[0], move[1] ];
