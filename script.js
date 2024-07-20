@@ -56,6 +56,8 @@ function checkWin(y, x) {
     }
 }
 
+const winAnnouncement = document.querySelector('.win-announcement');
+
 let moveNum = 1;
 let inkr;
 let moveCount = 0;
@@ -71,11 +73,9 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         // change increment every move
         if (moveNum % 2 != 0) { inkr = -1; }
         else { inkr = 1; }
-        if( inkr === 1 ) {
-            el.innerHTML = 'x';
-        } else {
-            el.innerHTML = 'o';
-        }
+
+        if( inkr === 1 ) { el.innerHTML = 'x'; }
+        else { el.innerHTML = 'o'; }
 
         // change array move indices
         ar[move[0]][move[1]] = inkr;
@@ -85,9 +85,9 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         el.dataset.value = 1;
 
         let win = checkWin(move[0], move[1]);
-        if (win === 1) { alert("1 Won"); }
-        else if (win === -1) { alert("-1 Won"); }
+        if (win === 1) { winAnnouncement.textContent = "X Won"; }
+        else if (win === -1) { winAnnouncement.textContent = "O Won"; }
 
-        if (moveCount == 9) {alert("Draw"); }
+        if (moveCount == 9) {winAnnouncement.textContent = "Draw"; }
     }
 }));

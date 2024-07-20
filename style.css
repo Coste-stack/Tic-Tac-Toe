@@ -6,6 +6,7 @@ body {
     width: 100%; height: 100%;
     display: grid;
     place-items: center center;
+    grid-template-rows: 10% 90%;
 }
 
 .gameboard {
@@ -24,4 +25,12 @@ body {
     display: grid;
     place-items: center center;
     font-size: 3rem;
+}
+
+.win-announcement {
+    width: 100%; height: 100%;
+    background-color: brown;
+
+    display: grid;
+    place-items: center center;
 }
