@@ -1,3 +1,4 @@
+// add 3x3 blocks to the container
 const gameboard = document.querySelector('.gameboard');
 for(let i = 0; i < 3; i++){
     for(let j = 0; j < 3; j++){
@@ -8,7 +9,14 @@ for(let i = 0; i < 3; i++){
     }
 }
 
-
+// add on click event to all blocks
+gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', () => {
+    if(!el.classList.contains('clicked')){
+        el.classList.add('clicked');
+        el.style.backgroundColor = "red";
+        el.dataset.value = 1;
+    }
+}));
 
 function printArray(ar) {
     for(let i = 0; i < 3; i++) {
