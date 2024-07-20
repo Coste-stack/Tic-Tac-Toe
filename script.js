@@ -56,60 +56,54 @@ function addMove() {
 }
 
 function checkWin(y, x) {
-    function checkRowsColumns() {
-        let initX = x;
-        let initY = y;
+    let initX = x; let initY = y;
+    let sumCol = 0;
+    let sumRow = 0;
 
-        let sumCol = 0;
-        let sumRow = 0;
-        for(let i = 0; i < 3; i++) {
-            sumCol += ar[y][initX];
-            sumRow += ar[initY][x];
+    let sumLeft = 0; // left up (decrement 'y', decrement 'x')
+    let sumRight = 0; // right up (decrement 'y', increment 'x')
 
-            x++; y++; 
-            if(x > 2) { x = 0; }
-            if(y > 2) { y = 0; }
+    let xleft = x; let yleft = y;
+    let xright = x; let yright = y;
+    for(let i = 0; i < 3; i++) {
+        // do column
+        sumCol += ar[y][initX];
+        y++;
+        if(y > 2) { y = 0; }
 
-            // say if someone won
-            if (sumCol == 3 || sumRow == 3) { console.log("1 Won"); break; }
-            else if (sumCol == -3 || sumRow == -3) { console.log("-1 Won"); break; }
-        }
-        x = initX;
-        y = initY;
+        // do row
+        sumRow += ar[initY][x];
+        x++;
+        if(x > 2) { x = 0; }
+
+        // do left line
+        sumLeft += ar[yleft][xleft];
+        xleft--; yleft--;
+        if(xleft < 0) { xleft = 2; }
+        if(yleft < 0) { yleft = 2; }
+
+        // do right line
+        sumRight += ar[yright][xright];
+        xright++; yright--;
+        if(xright > 2) { xright = 0; }
+        if(yright < 0) { yright = 2; }
+        
+        // say if someone won
+        if (sumCol == 3 || sumRow == 3 || sumLeft == 3 || sumRight == 3) { return 1; }
+        else if (sumCol == -3 || sumRow == -3 || sumLeft == -3 || sumRight == -3) { return -1 }
     }
-
-    function checkDiagonal() {
-        let sumLeft = 0; // left up (decrement 'y', decrement 'x')
-        let sumRight = 0; // right up (decrement 'y', increment 'x')
-
-        let xleft = x; let yleft = y;
-        let xright = x; let yright = y;
-        for(let i = 0; i < 3; i++) {
-            // do left line
-            sumLeft += ar[yleft][xleft];
-            xleft--; yleft--;
-            if(xleft < 0) { xleft = 2; }
-            if(yleft < 0) { yleft = 2; }
-
-            // do right line
-            sumRight += ar[yright][xright];
-            xright++; yright--;
-            if(xright > 2) { xright = 0; }
-            if(yright < 0) { yright = 2; }
-            
-            // say if someone won
-            if (sumLeft == 3 || sumRight == 3) { console.log("1 Won"); break; }
-            else if (sumLeft == -3 || sumRight == -3) { console.log("-1 Won"); break; }
-        }
-    }
-
-    checkRowsColumns();
-    checkDiagonal();
 }
 
+let moveCount = 0;
 while (true) {
     let move = addMove();
+    moveCount++;
+    
     console.log("---------")
-    checkWin(move[0], move[1]);
+    let win = checkWin(move[0], move[1]);
+    if (win === 1) { console.log("1 Won"); break; }
+    else if (win === -1) { console.log("-1 Won"); break; }
+
+    if (moveCount == 9) {console.log("Draw"); break; }
 }
 
