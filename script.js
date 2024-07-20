@@ -56,7 +56,7 @@ function checkWin(y, x) {
     }
 }
 
-let moveNum = 0;
+let moveNum = 1;
 let inkr;
 let moveCount = 0;
 // add on click event to all blocks
@@ -71,6 +71,11 @@ gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', 
         // change increment every move
         if (moveNum % 2 != 0) { inkr = -1; }
         else { inkr = 1; }
+        if( inkr === 1 ) {
+            el.innerHTML = 'x';
+        } else {
+            el.innerHTML = 'o';
+        }
 
         // change array move indices
         ar[move[0]][move[1]] = inkr;

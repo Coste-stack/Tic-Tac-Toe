@@ -20,4 +20,8 @@ body {
     background-color: aquamarine;
     border-style: solid;
     width: 200px; height: 200px;;
+
+    display: grid;
+    place-items: center center;
+    font-size: 3rem;
 }
