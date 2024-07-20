@@ -9,50 +9,12 @@ for(let i = 0; i < 3; i++){
     }
 }
 
-// add on click event to all blocks
-gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', () => {
-    if(!el.classList.contains('clicked')){
-        el.classList.add('clicked');
-        el.style.backgroundColor = "red";
-        el.dataset.value = 1;
-    }
-}));
-
-function printArray(ar) {
-    for(let i = 0; i < 3; i++) {
-        let line = "";
-        for(let j = 0; j < 3; j++) {
-            line += ar[i][j].toString();
-        }
-        console.log(line);
-    }
-}
-
 // set up the array
 ar = [[], [], []]
 for(let i = 0; i < 3; i++) {
     for(let j = 0; j < 3; j++) {
         ar[i][j] = 0;
     }
-}
-
-let moveNum = 0;
-let inkr;
-function addMove() {
-    moveNum++;
-    // change increment every move
-    if (moveNum % 2 != 0) { inkr = -1; }
-    else { inkr = 1; }
-
-    // ask for move
-    let move = prompt();
-    //console.log(move[0], "-", move[1]);
-    
-    // change array move indices
-    ar[move[0]][move[1]] = inkr;
-    printArray(ar);
-
-    return move;
 }
 
 function checkWin(y, x) {
@@ -94,16 +56,35 @@ function checkWin(y, x) {
     }
 }
 
+let moveNum = 0;
+let inkr;
 let moveCount = 0;
-while (true) {
-    let move = addMove();
-    moveCount++;
-    
-    console.log("---------")
-    let win = checkWin(move[0], move[1]);
-    if (win === 1) { console.log("1 Won"); break; }
-    else if (win === -1) { console.log("-1 Won"); break; }
+// add on click event to all blocks
+gameboard.querySelectorAll('.block').forEach(el => el.addEventListener('click', () => {
+    if(!el.classList.contains('clicked')){
+        // get move
+        let move = el.classList[1];
+        move = [ move[0], move[1] ];
+        console.log(move);
 
-    if (moveCount == 9) {console.log("Draw"); break; }
-}
+        moveNum++;
+        // change increment every move
+        if (moveNum % 2 != 0) { inkr = -1; }
+        else { inkr = 1; }
 
+        // change array move indices
+        ar[move[0]][move[1]] = inkr;
+
+        el.classList.add('clicked');
+        el.style.backgroundColor = "red";
+        el.dataset.value = 1;
+
+        moveCount++;
+
+        let win = checkWin(move[0], move[1]);
+        if (win === 1) { alert("1 Won"); }
+        else if (win === -1) { alert("-1 Won"); }
+
+        if (moveCount == 9) {alert("Draw"); }
+    }
+}));
