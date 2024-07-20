@@ -42,17 +42,29 @@ function checkWin(y, x) {
         x++;
         if(x > 2) { x = 0; }
 
-        // do left line
-        sumLeft += ar[yleft][xleft];
-        xleft--; yleft--;
-        if(xleft < 0) { xleft = 2; }
-        if(yleft < 0) { yleft = 2; }
+        // check diagonals only if placed the figure on corners or middle
+        if ((xleft == 0 && (yleft == 0 || yleft == 2 )) ||
+            (xleft == 2 && (yleft == 0 || yleft == 2 )) ||
+            (xleft == 1 && yleft == 1)) {
 
-        // do right line
-        sumRight += ar[yright][xright];
-        xright++; yright--;
-        if(xright > 2) { xright = 0; }
-        if(yright < 0) { yright = 2; }
+            // do left line
+            sumLeft += ar[yleft][xleft];
+            xleft--; yleft--;
+            if(xleft < 0) { xleft = 2; }
+            if(yleft < 0) { yleft = 2; }
+        }
+        
+        if ((xright == 0 && (yright == 0 || yright == 2 )) ||
+            (xright == 2 && (yright == 0 || yright == 2 )) ||
+            (xright == 1 && yright == 1)) {
+
+            // do right line
+            sumRight += ar[yright][xright];
+            xright++; yright--;
+            if(xright > 2) { xright = 0; }
+            if(yright < 0) { yright = 2; }
+        }
+        
         
         // say if someone won
         if (sumCol == 3 || sumRow == 3 || sumLeft == 3 || sumRight == 3) { return 1; }
